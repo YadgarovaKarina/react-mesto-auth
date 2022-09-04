@@ -1,4 +1,3 @@
-import '../pages/index.css';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -12,7 +11,13 @@ function App() {
     const [openPopupName, setOpenPopupName] = React.useState('');
     const [selectedCard, setSelectedCard] = React.useState({});
 
-    React.useEffect(() => { api.getInitialCards().then(cards => setCards(cards)) });
+    React.useEffect(() => {
+        api.getInitialCards()
+            .then(cards => setCards(cards))
+            .catch((err) => {
+                console.log(err);
+            })
+    });
 
     const handleClosePopup = () => {
         setOpenPopupName('');
@@ -49,6 +54,7 @@ function App() {
             <PopupWithForm
                 name="edit-profile"
                 title="Редактировать профиль"
+                buttonText="Сохранить"
                 isOpen={openPopupName === 'edit-profile'}
                 onClose={handleClosePopup}>
                 <input type="text" name="name" placeholder="Имя" className="popup__form-input"
@@ -61,6 +67,7 @@ function App() {
             <PopupWithForm
                 name="new-card"
                 title="Новое место"
+                buttonText="Создать"
                 isOpen={openPopupName === 'new-card'}
                 onClose={handleClosePopup}>
                 <input type="text" id="popup__item-place" name="name" placeholder="Название" className="popup__form-input"
@@ -75,16 +82,15 @@ function App() {
                 isOpen={openPopupName === 'full-photo'}
                 onClose={handleClosePopup}
             />
-            <div className="popup popup_type_delete-card" onClose={handleClosePopup}>
-                <div className="popup__content">
-                    <button type="button" className="popup__close-button popup__close-button_delete"></button>
-                    <h2 className="popup__title popup__title_delete">Вы уверены?</h2>
-                    <button type="submit" className="popup__submit-button popup__submit-button_delete">Да</button>
-                </div>
-            </div>
+            <PopupWithForm name="delete-card"
+                title="Вы уверены?"
+                buttonText="Да"
+                onClose={handleClosePopup}>
+            </PopupWithForm>
             <PopupWithForm
                 name="avatar"
                 title="Обновить аватар"
+                buttonText="Сохранить"
                 isOpen={openPopupName === 'avatar'}
                 onClose={handleClosePopup}>
                 <input type="url" id="popup__item-avatar" name="avatar" placeholder="Ссылка на изображение"

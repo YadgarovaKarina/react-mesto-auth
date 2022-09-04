@@ -15,6 +15,9 @@ const Main = (props) => {
             setUserDescription(profile.about);
             setUserAvatar(profile.avatar);
         })
+        .catch((err) => {
+            console.log(err);
+          })
     }, []);
    
     return (
