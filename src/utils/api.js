@@ -28,7 +28,7 @@ export class Api {
         return fetch(`${this._url}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
-            body: JSON.stringify(name,about)
+            body: JSON.stringify({name, about})
         }).then(this._handleStatus)
     }
 
@@ -36,7 +36,7 @@ export class Api {
         return fetch(`${this._url}/cards`, {
             method: 'POST',
             headers: this._headers,
-            body: JSON.stringify(name, link)
+            body: JSON.stringify({name, link})
         }).then(this._handleStatus)
     }
 
@@ -47,18 +47,22 @@ export class Api {
         }).then(this._handleStatus)
     }
 
-    addLike(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
-            method: 'PUT',
-            headers: this._headers
-        }).then(this._handleStatus)
-    }
-
-    deleteLike(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
-            method: 'DELETE',
-            headers: this._headers
-        }).then(this._handleStatus)
+    changeLikeCardStatus(id, isLiked) {
+        if (isLiked) {
+            return fetch(`${this._url}/cards/${id}/likes`,
+                {
+                    method: 'PUT',
+                    headers: this._headers,
+                })
+                .then(this._handleStatus)
+        } else {
+            return fetch(`${this._url}/cards/${id}/likes`,
+                {
+                    method: 'DELETE',
+                    headers: this._headers,
+                })
+                .then(this._handleStatus)
+        }
     }
 
     updateAvatar(avatar) {
@@ -74,7 +78,7 @@ export class Api {
 export const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-48',
     headers: {
-      authorization: 'b8918bb6-8c8c-461f-acb0-f8f8bf54b78b',
-      'Content-Type': 'application/json'
+        authorization: 'b8918bb6-8c8c-461f-acb0-f8f8bf54b78b',
+        'Content-Type': 'application/json'
     }
-  });
+});
