@@ -1,8 +1,7 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-const Card = (props) => {
-    const { data, onClick, onLike, onDelete } = props;
+const Card = ({ data, onClick, onLike, onDelete }) => {
     const currentUser = React.useContext(CurrentUserContext);
 
     const isOwn = data.owner._id === currentUser._id;
@@ -22,7 +21,7 @@ const Card = (props) => {
     return (
         <li className="element">
             <img className="element__image" alt="Изображение" src={data.link} onClick={() => onClick(data)} />
-            {isOwn && <button type="button" className='element__delete-button' onClick={() => handleDeleteClick()}></button>}
+            {isOwn && <button type="button" className='element__delete-button' onClick={handleDeleteClick}></button>}
             <div className="element__info">
                 <p className="element__title">{data.name}</p>
                 <div className="element__like-container">

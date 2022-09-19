@@ -1,7 +1,6 @@
 import React from 'react';
 
-const PopupWithForm = (props) => {
-  const { name, title, buttonText, children, isOpen, onClose, onSubmit } = props;
+const PopupWithForm = ({ name, title, buttonText, children, isOpen, onClose, onSubmit }) => {
   const className = `popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`;
 
   return (

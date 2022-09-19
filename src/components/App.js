@@ -91,7 +91,7 @@ function App() {
     function handleCardDelete(card) {
         api.deleteCard(card._id)
             .then(() => {
-                setCards(cards.filter((c) => c._id !== card._id));
+                setCards(cards => cards.filter((c) => c._id !== card._id));
             })
             .catch((err) => {
                 console.log(err);
@@ -100,13 +100,13 @@ function App() {
 
     function handleAddPlaceSubmit({ name, link }) {
         api.addNewCard(name, link)
-        .then((newCard) => {
-            setCards([newCard, ...cards]); 
-            handleClosePopup();
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+            .then((newCard) => {
+                setCards([newCard, ...cards]);
+                handleClosePopup();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     return (
