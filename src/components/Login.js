@@ -19,13 +19,6 @@ const Login = ({ onLogin }) => {
         e.preventDefault();
         const { email, password } = state;
         onLogin(email, password)
-            .catch(err => {
-                console.log(err);
-                setState({
-                    ...state,
-                    message: 'Что-то пошло не так!'
-                })
-            });
     };
 
     return (

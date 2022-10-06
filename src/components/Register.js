@@ -19,13 +19,6 @@ const Register = ({ onRegister }) => {
     e.preventDefault();
     const { email, password } = state;
     onRegister(email, password)
-      .catch(err => {
-        console.log(err);
-        setState({
-          ...state,
-          message: 'Что-то пошло не так!'
-        })
-      });
   }
 
   return (

@@ -42,6 +42,10 @@ function App() {
                 history.push('/');
             })
             .catch((err) => {
+                showInfoPopup({
+                    image: error,
+                    text: 'Что-то пошло не так! Попробуйте ещё раз.'
+                });
                 console.log(err)
             });
     };
